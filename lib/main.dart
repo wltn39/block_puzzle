@@ -3,6 +3,13 @@ import 'package:flutter/services.dart';
 import 'rankList.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'rank.dart';
+import 'package:just_audio/just_audio.dart'; // 소리 mp3
+import 'package:fluttertoast/fluttertoast.dart'; // 팝업 메시지 토스트
+import 'package:fading_image_button/fading_image_button.dart'; // 이미지 버튼
+import 'package:vibration/vibration.dart'; // 진동
+import 'package:url_launcher/url_launcher.dart'; // 웹페이 열기에 사용
+import 'package:intl/intl.dart'; // 달력
 
 void main() {
   runApp(const MyApp());
@@ -47,20 +54,59 @@ class DatabaseApp extends StatefulWidget {
   DatabaseApp(this.db);
 
   @override
-  State<DatabaseApp> createState() => _DatabaseAppState();
+  State<DatabaseApp> createState() => _DatabaseApp();
 }
 
-class _DatabaseAppState extends State<DatabaseApp> {
+class _DatabaseApp extends State<DatabaseApp> {
+  @override
+  void dispose() {
+    _player.stop();
+    _playerLoop.stop();
+    _player.dispose();
+    _playerLoop.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // return const Text('테트리스 메인 화면');
-    return ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/rankList');
-        },
-        child: const Text(
-          'Rank',
-          style: TextStyle(color: Colors.white, fontSize: 13),
-        ));
-  }
+  //   return ElevatedButton(
+  //       onPressed: () {
+  //         Navigator.of(context).pushNamed('/rankList');
+  //       },
+  //       child: const Text(
+  //         'Rank',
+  //         style: TextStyle(color: Colors.white, fontSize: 13),
+  //       ));
+  // }
+  return Scaffold(
+    backgroundColor: Colors.transparent,
+    appBar: AppBar(),
+    body: Container(), 
+  );
+}
+
+void flutter_toast(_toasttime, _toastMsg) {
+  Fluttertoast.showToast(
+      msg: _toastMsg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: _toasttime,
+      backgroundColor: Colors.limeAccent,
+      textColor: Colors.black87,
+      fontSize: 18.0);
+}
+
+final _player = AudioPlayer();
+Future audioPlayer(parm_mp3) async {
+  await _player.setAsset(parm_mp3);
+  _player.play();
+}
+
+final _playerLoop = AudioPlayer(); // 백그라운드 반복
+Future audioPlayerLoop(parm_mp3) async {
+  await _playerLoop.setLoopMode(LoopMode.one); // 반복 설정
+  await _playerLoop.setAsset(parm_mp3);
+  _playerLoop.play();
 }
