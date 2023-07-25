@@ -68,45 +68,118 @@ class _DatabaseApp extends State<DatabaseApp> {
     super.dispose();
   }
 
+  bool? v_flagButtonPlay = true;
+
+  // 변수설정
+  String v_image_volume = 'asset/images/volumeOn.png';
+  bool v_volume = true;
+
   @override
   Widget build(BuildContext context) {
     // return const Text('테트리스 메인 화면');
-  //   return ElevatedButton(
-  //       onPressed: () {
-  //         Navigator.of(context).pushNamed('/rankList');
-  //       },
-  //       child: const Text(
-  //         'Rank',
-  //         style: TextStyle(color: Colors.white, fontSize: 13),
-  //       ));
-  // }
-  return Scaffold(
-    backgroundColor: Colors.transparent,
-    appBar: AppBar(),
-    body: Container(), 
-  );
-}
+    //   return ElevatedButton(
+    //       onPressed: () {
+    //         Navigator.of(context).pushNamed('/rankList');
+    //       },
+    //       child: const Text(
+    //         'Rank',
+    //         style: TextStyle(color: Colors.white, fontSize: 13),
+    //       ));
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: const Text(
+          'Block Puzzle',
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+        actions: [
+          ElevatedButton(
+            child: Image.asset(
+              'asset/images/lock.png',
+              height: 30,
+              width: 25,
+            ),
+            onPressed: () async {
+              if (v_flagButtonPlay == false) {
+                flutter_toast(1, 'Not executed!');
+              } else {
+                const url = 'https://velog.io/@wltn39';
+                await launchUrl(
+                  Uri.parse(url),
+                  mode: LaunchMode.externalApplication,
+                );
+              }
+            },
+          ),
+          ElevatedButton(
+            child: Image.asset(
+              'asset/images/playstore.png',
+              height: 22,
+              width: 25,
+            ),
+            onPressed: () async {
+              if (v_flagButtonPlay == false) {
+                flutter_toast(1, 'Not executed!');
+              } else {
+                const url =
+                    'https://play.google.com/store/apps/details?id=com.gpldy.block_puzzle';
+                await launchUrl(
+                  Uri.parse(url),
+                  mode: LaunchMode.externalApplication,
+                );
+              }
+            },
+          ),
+          ElevatedButton(
+            child: Image.asset(
+              'v_image_volume',
+              height: 22,
+              width: 25,
+            ),
+            onPressed: () {
+              if (v_volume == true) {
+                v_image_volume = 'asset/images/volumeOff.png';
+                v_volume = false;
+                if (v_flagButtonPlay == false) {
+                  _playerLoop.pause();
+                }
+              } else {
+                v_image_volume = 'asset/images/volumeOn.png';
+                v_volume = true;
+                if (v_flagButtonPlay == false) {
+                  _playerLoop.play();
+                }
+              }
+              setState(() {});
+            },
+          ),
+        ],
+      ),
+      body: Container(),
+    );
+  }
 
-void flutter_toast(_toasttime, _toastMsg) {
-  Fluttertoast.showToast(
-      msg: _toastMsg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: _toasttime,
-      backgroundColor: Colors.limeAccent,
-      textColor: Colors.black87,
-      fontSize: 18.0);
-}
+  void flutter_toast(_toasttime, _toastMsg) {
+    Fluttertoast.showToast(
+        msg: _toastMsg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: _toasttime,
+        backgroundColor: Colors.limeAccent,
+        textColor: Colors.black87,
+        fontSize: 18.0);
+  }
 
-final _player = AudioPlayer();
-Future audioPlayer(parm_mp3) async {
-  await _player.setAsset(parm_mp3);
-  _player.play();
-}
+  final _player = AudioPlayer();
+  Future audioPlayer(parm_mp3) async {
+    await _player.setAsset(parm_mp3);
+    _player.play();
+  }
 
-final _playerLoop = AudioPlayer(); // 백그라운드 반복
-Future audioPlayerLoop(parm_mp3) async {
-  await _playerLoop.setLoopMode(LoopMode.one); // 반복 설정
-  await _playerLoop.setAsset(parm_mp3);
-  _playerLoop.play();
+  final _playerLoop = AudioPlayer(); // 백그라운드 반복
+  Future audioPlayerLoop(parm_mp3) async {
+    await _playerLoop.setLoopMode(LoopMode.one); // 반복 설정
+    await _playerLoop.setAsset(parm_mp3);
+    _playerLoop.play();
+  }
 }
