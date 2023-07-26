@@ -68,11 +68,17 @@ class _DatabaseApp extends State<DatabaseApp> {
     super.dispose();
   }
 
+  // 모든 Flag 설정
   bool? v_flagButtonPlay = true;
 
   // 변수설정
   String v_image_volume = 'asset/images/volumeOn.png';
   bool v_volume = true;
+
+  // 모든 배열 설정, 판배열 = v_listBox, 배열 (20행*10열*특성 5)
+  // 특성 1,2,3,rgb, 특성4 이동 on,off 1,0, 특성5 고정 on off 1,0
+  final v_listBox = List.generate(
+      20, (i) => List.generate(10, (j) => List.generate(5, (k) => 0)));
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +138,7 @@ class _DatabaseApp extends State<DatabaseApp> {
           ),
           ElevatedButton(
             child: Image.asset(
-              'v_image_volume',
+              v_image_volume,
               height: 22,
               width: 25,
             ),
@@ -150,12 +156,284 @@ class _DatabaseApp extends State<DatabaseApp> {
                   _playerLoop.play();
                 }
               }
+              ;
               setState(() {});
             },
           ),
+          ElevatedButton(
+              onPressed: () {
+                if (v_flagButtonPlay == true) {
+                  Navigator.of(context).pushNamed('/rankList');
+                } else {
+                  flutter_toast(1, 'Not executed!');
+                }
+              },
+              child: const Text(
+                'Rank',
+                style: TextStyle(color: Colors.white, fontSize: 13),
+              )),
         ],
       ),
-      body: Container(),
+      body: Container(
+        child: Column(
+          children: [
+            // body 상단
+            Expanded(
+              flex: 15,
+              child: Container(
+                // color: Colors.yellow,
+                child: Row(
+                  children: [
+                    // body 상단 좌측 200개 버튼
+                    Expanded(
+                      flex: 14,
+                      child: Container(
+                        // color: Colors.yellow,
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.blue,
+                            width: 3,
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[1][0][0],
+                                    v_listBox[1][0][1], v_listBox[1][0][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][1][0],
+                                    v_listBox[0][1][1], v_listBox[0][1][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][2][0],
+                                    v_listBox[0][2][1], v_listBox[0][2][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][3][0],
+                                    v_listBox[0][3][1], v_listBox[0][3][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][4][0],
+                                    v_listBox[0][4][1], v_listBox[0][4][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][5][0],
+                                    v_listBox[0][5][1], v_listBox[0][5][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][6][0],
+                                    v_listBox[0][6][1], v_listBox[0][6][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][7][0],
+                                    v_listBox[0][7][1], v_listBox[0][7][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][8][0],
+                                    v_listBox[0][8][1], v_listBox[0][8][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][9][0],
+                                    v_listBox[0][9][1], v_listBox[0][9][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][0][0],
+                                    v_listBox[0][0][1], v_listBox[0][0][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][1][0],
+                                    v_listBox[0][1][1], v_listBox[0][1][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][2][0],
+                                    v_listBox[0][2][1], v_listBox[0][2][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][3][0],
+                                    v_listBox[0][3][1], v_listBox[0][3][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][4][0],
+                                    v_listBox[0][4][1], v_listBox[0][4][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][5][0],
+                                    v_listBox[0][5][1], v_listBox[0][5][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][6][0],
+                                    v_listBox[0][6][1], v_listBox[0][6][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][7][0],
+                                    v_listBox[0][7][1], v_listBox[0][7][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][8][0],
+                                    v_listBox[0][8][1], v_listBox[0][8][2], 1),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(1),
+                                color: Color.fromRGBO(v_listBox[0][9][0],
+                                    v_listBox[0][9][1], v_listBox[0][9][2], 1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    // body 상단 우측
+                    Expanded(
+                      flex: 6,
+                      child: Container(
+                          child: Column(children: [
+                        // body 상단 우측 Next1
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            color: Colors.red,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                        // body 상단 우측 레벨, 점수
+                        Expanded(
+                          flex: 8,
+                          child: Container(
+                            color: Colors.white,
+                          ),
+                        ),
+                        // 상단 우측 빈칸
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ])),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // body 하단
+            Expanded(
+              flex: 5,
+              child: Container(
+                // color: Colors.blue,
+                child: Row(
+                  children: [
+                    // body 하단 좌측 방향키
+                    Expanded(
+                      flex: 14,
+                      child: Container(
+                        color: Colors.pink,
+                      ),
+                    ),
+                    // body 하단 우측 3개 버튼
+                    Expanded(
+                      flex: 6,
+                      child: Container(
+                        color: Colors.amber,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 63,
+      ),
     );
   }
 
