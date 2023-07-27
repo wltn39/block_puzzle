@@ -202,168 +202,439 @@ class _DatabaseApp extends State<DatabaseApp> {
                             Expanded(
                               flex: 1,
                               child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[1][0][0],
-                                    v_listBox[1][0][1], v_listBox[1][0][2], 1),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][1][0],
+                                            v_listBox[0][1][1],
+                                            v_listBox[0][1][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][2][0],
+                                            v_listBox[0][2][1],
+                                            v_listBox[0][2][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][3][0],
+                                            v_listBox[0][3][1],
+                                            v_listBox[0][3][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][4][0],
+                                            v_listBox[0][4][1],
+                                            v_listBox[0][4][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][5][0],
+                                            v_listBox[0][5][1],
+                                            v_listBox[0][5][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][6][0],
+                                            v_listBox[0][6][1],
+                                            v_listBox[0][6][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][7][0],
+                                            v_listBox[0][7][1],
+                                            v_listBox[0][7][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][8][0],
+                                            v_listBox[0][8][1],
+                                            v_listBox[0][8][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[0][9][0],
+                                            v_listBox[0][9][1],
+                                            v_listBox[0][9][2],
+                                            1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][1][0],
-                                    v_listBox[0][1][1], v_listBox[0][1][2], 1),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][1][0],
+                                            v_listBox[1][1][1],
+                                            v_listBox[1][1][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][2][0],
+                                            v_listBox[1][2][1],
+                                            v_listBox[1][2][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][3][0],
+                                            v_listBox[1][3][1],
+                                            v_listBox[1][3][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][4][0],
+                                            v_listBox[1][4][1],
+                                            v_listBox[1][4][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][5][0],
+                                            v_listBox[1][5][1],
+                                            v_listBox[1][5][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][6][0],
+                                            v_listBox[1][6][1],
+                                            v_listBox[1][6][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][7][0],
+                                            v_listBox[1][7][1],
+                                            v_listBox[1][7][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][8][0],
+                                            v_listBox[1][8][1],
+                                            v_listBox[1][8][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[1][9][0],
+                                            v_listBox[1][9][1],
+                                            v_listBox[1][9][2],
+                                            1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][2][0],
-                                    v_listBox[0][2][1], v_listBox[0][2][2], 1),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][1][0],
+                                            v_listBox[2][1][1],
+                                            v_listBox[2][1][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][2][0],
+                                            v_listBox[2][2][1],
+                                            v_listBox[2][2][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][3][0],
+                                            v_listBox[2][3][1],
+                                            v_listBox[2][3][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][4][0],
+                                            v_listBox[2][4][1],
+                                            v_listBox[2][4][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][5][0],
+                                            v_listBox[2][5][1],
+                                            v_listBox[2][5][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][6][0],
+                                            v_listBox[2][6][1],
+                                            v_listBox[2][6][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][7][0],
+                                            v_listBox[2][7][1],
+                                            v_listBox[2][7][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][8][0],
+                                            v_listBox[2][8][1],
+                                            v_listBox[2][8][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[2][9][0],
+                                            v_listBox[2][9][1],
+                                            v_listBox[2][9][2],
+                                            1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][3][0],
-                                    v_listBox[0][3][1], v_listBox[0][3][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][4][0],
-                                    v_listBox[0][4][1], v_listBox[0][4][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][5][0],
-                                    v_listBox[0][5][1], v_listBox[0][5][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][6][0],
-                                    v_listBox[0][6][1], v_listBox[0][6][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][7][0],
-                                    v_listBox[0][7][1], v_listBox[0][7][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][8][0],
-                                    v_listBox[0][8][1], v_listBox[0][8][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][9][0],
-                                    v_listBox[0][9][1], v_listBox[0][9][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][0][0],
-                                    v_listBox[0][0][1], v_listBox[0][0][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][1][0],
-                                    v_listBox[0][1][1], v_listBox[0][1][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][2][0],
-                                    v_listBox[0][2][1], v_listBox[0][2][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][3][0],
-                                    v_listBox[0][3][1], v_listBox[0][3][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][4][0],
-                                    v_listBox[0][4][1], v_listBox[0][4][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][5][0],
-                                    v_listBox[0][5][1], v_listBox[0][5][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][6][0],
-                                    v_listBox[0][6][1], v_listBox[0][6][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][7][0],
-                                    v_listBox[0][7][1], v_listBox[0][7][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][8][0],
-                                    v_listBox[0][8][1], v_listBox[0][8][2], 1),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.all(1),
-                                color: Color.fromRGBO(v_listBox[0][9][0],
-                                    v_listBox[0][9][1], v_listBox[0][9][2], 1),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][1][0],
+                                            v_listBox[3][1][1],
+                                            v_listBox[3][1][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][2][0],
+                                            v_listBox[3][2][1],
+                                            v_listBox[3][2][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][3][0],
+                                            v_listBox[3][3][1],
+                                            v_listBox[3][3][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][4][0],
+                                            v_listBox[3][4][1],
+                                            v_listBox[3][4][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][5][0],
+                                            v_listBox[3][5][1],
+                                            v_listBox[3][5][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][6][0],
+                                            v_listBox[3][6][1],
+                                            v_listBox[3][6][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][7][0],
+                                            v_listBox[3][7][1],
+                                            v_listBox[3][7][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][8][0],
+                                            v_listBox[3][8][1],
+                                            v_listBox[3][8][2],
+                                            1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        margin: EdgeInsets.all(1),
+                                        color: Color.fromRGBO(
+                                            v_listBox[3][9][0],
+                                            v_listBox[3][9][1],
+                                            v_listBox[3][9][2],
+                                            1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-
                     // body 상단 우측
                     Expanded(
                       flex: 6,
