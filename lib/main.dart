@@ -74,6 +74,8 @@ class _DatabaseApp extends State<DatabaseApp> {
   // 변수설정
   String v_image_volume = 'asset/images/volumeOn.png';
   bool v_volume = true;
+  int v_level = 0; // (레벨 - v_level)
+  int v_score = 0; // (점수 - v_score)
 
   // 모든 배열 설정, 판배열 = v_listBox, 배열 (20행*10열*특성 5)
   // 특성 1,2,3,rgb, 특성4 이동 on,off 1,0, 특성5 고정 on off 1,0
@@ -2686,6 +2688,59 @@ class _DatabaseApp extends State<DatabaseApp> {
                                                 child: Container(
                                                   margin: EdgeInsets.all(1),
                                                   color: Color.fromRGBO(
+                                                      v_listN1Box[3][0][0],
+                                                      v_listN1Box[3][0][0],
+                                                      v_listN1Box[3][0][0],
+                                                      1),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                  margin: EdgeInsets.all(1),
+                                                  color: Color.fromRGBO(
+                                                      v_listN1Box[3][1][0],
+                                                      v_listN1Box[3][1][0],
+                                                      v_listN1Box[3][1][0],
+                                                      1),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                  margin: EdgeInsets.all(1),
+                                                  color: Color.fromRGBO(
+                                                      v_listN1Box[3][2][0],
+                                                      v_listN1Box[3][2][0],
+                                                      v_listN1Box[3][2][0],
+                                                      1),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                  margin: EdgeInsets.all(1),
+                                                  color: Color.fromRGBO(
+                                                      v_listN1Box[3][3][0],
+                                                      v_listN1Box[3][3][0],
+                                                      v_listN1Box[3][3][0],
+                                                      1),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                  margin: EdgeInsets.all(1),
+                                                  color: Color.fromRGBO(
                                                       v_listN1Box[1][0][0],
                                                       v_listN1Box[1][0][0],
                                                       v_listN1Box[1][0][0],
@@ -2792,15 +2847,269 @@ class _DatabaseApp extends State<DatabaseApp> {
                         Expanded(
                           flex: 6,
                           child: Container(
-                            color: Colors.blueAccent,
+                            child: Container(
+                              // color: Colors.red,
+                              child: Column(children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(5, 0, 5, 5),
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(
+                                      'Next 2',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                // body 상단 우측 Next2 16개 박스
+                                Expanded(
+                                  flex: 5,
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(5, 0, 10, 0),
+                                    color: Colors.white24,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[0][0][0],
+                                                        v_listN1Box[0][0][0],
+                                                        v_listN1Box[0][0][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[0][1][0],
+                                                        v_listN1Box[0][1][0],
+                                                        v_listN1Box[0][1][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[0][2][0],
+                                                        v_listN1Box[0][2][0],
+                                                        v_listN1Box[0][2][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[0][3][0],
+                                                        v_listN1Box[0][3][0],
+                                                        v_listN1Box[0][3][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[3][0][0],
+                                                        v_listN1Box[3][0][0],
+                                                        v_listN1Box[3][0][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[3][1][0],
+                                                        v_listN1Box[3][1][0],
+                                                        v_listN1Box[3][1][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[3][2][0],
+                                                        v_listN1Box[3][2][0],
+                                                        v_listN1Box[3][2][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[3][3][0],
+                                                        v_listN1Box[3][3][0],
+                                                        v_listN1Box[3][3][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[1][0][0],
+                                                        v_listN1Box[1][0][0],
+                                                        v_listN1Box[1][0][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[1][1][0],
+                                                        v_listN1Box[1][1][0],
+                                                        v_listN1Box[1][1][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[1][2][0],
+                                                        v_listN1Box[1][2][0],
+                                                        v_listN1Box[1][2][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[1][3][0],
+                                                        v_listN1Box[1][3][0],
+                                                        v_listN1Box[1][3][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[2][0][0],
+                                                        v_listN1Box[2][0][0],
+                                                        v_listN1Box[2][0][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[2][1][0],
+                                                        v_listN1Box[2][1][0],
+                                                        v_listN1Box[2][1][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[2][2][0],
+                                                        v_listN1Box[2][2][0],
+                                                        v_listN1Box[2][2][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    margin: EdgeInsets.all(1),
+                                                    color: Color.fromRGBO(
+                                                        v_listN1Box[2][3][0],
+                                                        v_listN1Box[2][3][0],
+                                                        v_listN1Box[2][3][0],
+                                                        1),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
                           ),
                         ),
                         // body 상단 우측 레벨, 점수
                         Expanded(
                           flex: 8,
                           child: Container(
-                            color: Colors.white,
-                          ),
+                              // color: Colors.white,
+                            margin: EdgeInsets.fromLTRB(0, 50, 5, 0),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 1, 
+                                  child: Container(
+                                    decoration: BoxDecoration(border: Border.all(color: Colors.white,
+                                    width: 1,),))
+                                  )
+                                )
+                              ]
+                            )
+                              ),
                         ),
                         // 상단 우측 빈칸
                         Expanded(
