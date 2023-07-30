@@ -13,6 +13,16 @@ class RankListApp extends StatefulWidget {
 class _RankListAppState extends State<RankListApp> {
   @override
   Widget build(BuildContext context) {
-    return const Text('게임 결과 화면');
+    // return const Text('게임 결과 화면');
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Rank'),
+      ),
+      body: Container(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.remove),
+      ),
+    );
   }
 }
