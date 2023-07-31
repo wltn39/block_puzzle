@@ -4042,7 +4042,7 @@ class _DatabaseApp extends State<DatabaseApp> {
       //아이템이 게임판에 모두 안보이면
       return;
 
-    // 회전대상 위치 구하기
+    // 0.회전대상 위치 구하기
     // 회전대상의 저장위치를 초기화
     for (i = 0; i < v_rowNext; i++) {
       for (j = 0; j < 3; j++) {
@@ -4071,6 +4071,7 @@ class _DatabaseApp extends State<DatabaseApp> {
         }
       }
     }
+    //1.중심점 구하기_center
     num _sum_h = 0;
     num _sum_v = 0;
     num _avr_h = 0; //중심점 수평
@@ -4096,5 +4097,65 @@ class _DatabaseApp extends State<DatabaseApp> {
       }
       ;
     }
+    //2. 이동위치 구하기 (사각형은 회전 제외)
+    if (v_listMove[0][2] == v_listMove[1][2] &&
+        v_listMove[1][2] == v_listMove[2][2] &&
+        v_listMove[2][2] == v_listMove[3][2]) {
+      return;
+    }
+    for (ii = 0; ii < v_listMove.length; ii++) {
+      if (ii == _center) {
+        // 기준점
+        v_listMoveTarget[ii][0] = v_listMove[ii][0];
+        v_listMoveTarget[ii][1] = v_listMove[ii][1];
+      } else if (v_listMove[_center][0] == v_listMove[ii][0]) {
+        // 기준점의 좌우에 위치 => 상하로 배치
+        // 배치위치(중심i - 중심j + 대상j, 중심j)
+        v_listMoveTarget[ii][0] =
+            v_listMove[_center][0] - v_listMove[_center][1] + v_listMove[ii][1];
+      } else if (v_listMove[_center][1] == v_listMove[ii][1]) {
+        // 기준점의 상하 => 좌우
+        // 배치위치(중심i, 중심j + 중심i - 대상i)
+        v_listMoveTarget[ii][0] = v_listMove[_center][0];
+        v_listMoveTarget[ii][1] = v_listMove[_center][1] +
+            v_listMoveTarget[ii][1] -
+            v_listMove[ii][1];
+      } else {
+        // 기준점의 우상좌하 => 우하좌상
+        // 배치위치(중심i + 중심j - 대상i, 대상j)
+        v_listMoveTarget[ii][0] =
+            v_listMove[_center][0] + v_listMove[_center][0] - v_listMove[ii][0];
+        v_listMoveTarget[ii][1] = v_listMove[ii][1];
+      }
+    }
+    // 3. 회전가능 체크
+    for (ii = 0; ii < v_rowNext; ii++) {
+      if (v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][4] == 1) {
+        return;
+      }
+      if (v_listMoveTarget[ii][0] < 0 ||
+          v_listMoveTarget[ii][0] > v_rowBox - 1 ||
+          v_listMoveTarget[ii][1] < 0 ||
+          v_listMoveTarget[ii][1] > v_rowBox - 1) {
+        return;
+      }
+    }
+
+    // 4.회전
+    // 4 개의 옮길대상 위치를 초기화
+    for (ii = 0; ii < v_rowNext; ii++) {
+      for (k = 0; k < v_atr; k++) {
+        v_listBox[v_listMove[ii][0]][v_listMove[ii][1]][k] = 0;
+      }
+    }
+    // 4개의 옮겨갈 위치에 저장
+    for (ii = 0; ii < v_rowNext; ii++) {
+      v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][0] = _color_R;
+      v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][1] = _color_G;
+      v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][2] = _color_B;
+      v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][3] = 1;
+      v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][4] = 0;
+    }
+    setState(() {});
   }
 }
