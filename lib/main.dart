@@ -134,6 +134,10 @@ class _DatabaseApp extends State<DatabaseApp> {
   //배열(4행*2열)==>위치(x,y), 중심까지 거리(z)
   final v_listMoveTarget = List.generate(4, (i) => List.generate(2, (j) => 0));
 
+  //게임판 미러
+  final v_listMirrorBox = List.generate(
+      20, (i) => List.generate(10, (j) => List.generate(5, (k) => 0)));
+
   @override
   Widget build(BuildContext context) {
     // return const Text('테트리스 메인 화면');
@@ -3681,10 +3685,10 @@ class _DatabaseApp extends State<DatabaseApp> {
     v_listItem[11][2][1][1] = 33;
     v_listItem[11][2][1][2] = 243;
     v_listItem[11][2][1][3] = 1;
-    v_listItem[11][2][1][0] = 191;
-    v_listItem[11][2][1][1] = 33;
-    v_listItem[11][2][1][2] = 243;
-    v_listItem[11][2][1][3] = 1;
+    v_listItem[11][3][1][0] = 191;
+    v_listItem[11][3][1][1] = 33;
+    v_listItem[11][3][1][2] = 243;
+    v_listItem[11][3][1][3] = 1;
     v_listItem[11][3][2][0] = 191;
     v_listItem[11][3][2][1] = 33;
     v_listItem[11][3][2][2] = 243;
@@ -3845,6 +3849,16 @@ class _DatabaseApp extends State<DatabaseApp> {
   }
 
   void step_get_listN0Box() {
+    //4,5,6,7 칸에 고정이 있으면 게임종료
+    for (i = 0; i < v_colNext; i++) {
+      for (j = 0; j < v_atr; j++) {
+        if (v_listBox[0][i + 3][v_atr - 1] == 1) {
+          step_end_play();
+          return;
+        }
+      }
+    }
+
     if (v_listN0Box[0][0][0] >= v_lineNext) {
       // n0 라인수가 가져올 라인수보다 작지 않으면 n0의 1 라인을 게임판 4,5,6,7 칸으로 가져옴
       for (i = 0; i < v_colNext; i++) {
@@ -3854,6 +3868,26 @@ class _DatabaseApp extends State<DatabaseApp> {
       }
       v_lineNext++;
     }
+  }
+
+  //레벨실패
+  void step_end_play() {
+    _timer.cancel();
+    v_flagButtonPlay = true; // false 는 버튼을 못누름
+    v_flagButtonStop = false;
+    v_flagButtonPause = false;
+    v_flagButtonArrow = false;
+    _insert();
+    flutter_toast(2, 'Game Over!');
+    v_flagStartGame = true;
+  }
+
+  void _insert() async {
+    String _today = DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now());
+
+    final Database database = await widget.db;
+    await database.rawUpdate(
+        "inset into ranks (rankDate, score) values ('$_today', '$v_score)");
   }
 
   // 타이머 가동
@@ -3871,7 +3905,25 @@ class _DatabaseApp extends State<DatabaseApp> {
       }
       step_get_listN0Box(); // n0에 있는 아이템을 1줄을 게임판 1번줄 4,5,6,7칸에 옮겨옴
       setState(() {});
+      if (v_flagNext == true) step_check_line(); // 체크_줄깨기
+
+      //40개의 아이템이 생성되면 레벨성공
+      if (v_countItem > 40) {
+        step_end_level();
+      }
     });
+  }
+
+  //레벨성공
+  void step_end_level() {
+    _timer.cancel();
+    v_flagButtonPlay = true;
+    v_flagButtonStop = false;
+    v_flagButtonPause = false;
+    v_flagButtonArrow = false;
+    v_countItem = 0;
+    v_score = v_score + 300;
+    flutter_toast(2, 'Level Success!');
   }
 
   // 아이템을 next1 => next0, next2 => next1 로 옮김
@@ -3961,6 +4013,8 @@ class _DatabaseApp extends State<DatabaseApp> {
         step_lineDown_listBox();
       }
       setState(() {});
+
+      step_check_line();
     }
   }
 
@@ -3972,11 +4026,11 @@ class _DatabaseApp extends State<DatabaseApp> {
     //우로 보낼수 있는지 검토
     for (j = v_colBox - 1; j >= 0; j--) {
       //옮길칸
-      for (i = v_lineMove; i >= 0; i--) {
+      for (i = v_lineMove; i > 0; i--) {
         //옮길줄
         if (v_listBox[i - 1][j][v_atr - 2] == 1 && // 이동대상이면서
-            v_listBox[i - 1][j][v_atr - 1] == 0) // 고정이 아니면
-        {
+            v_listBox[i - 1][j][v_atr - 1] == 0) {
+          // 고정이 아니면
           if (j == 9) return;
           if (v_listBox[i - 1][j + 1][v_atr - 1] == 1) return;
         }
@@ -3985,11 +4039,11 @@ class _DatabaseApp extends State<DatabaseApp> {
     //우로 보낼수 있다고 검토되었으니 우로 보냄
     for (j = v_colBox - 1; j >= 0; j--) {
       //옮길 칸
-      for (i = v_lineMove; i >= 0; i--) {
+      for (i = v_lineMove; i > 0; i--) {
         //옮길 줄
         if (v_listBox[i - 1][j][v_atr - 2] == 1 && //이동대상이면서
-            v_listBox[i - 1][j][v_atr - 1] == 0) // 고정이 아니면
-        {
+            v_listBox[i - 1][j][v_atr - 1] == 0) {
+          // 고정이 아니면
           for (k = 0; k < v_atr; k++) {
             v_listBox[i - 1][j + 1][k] = v_listBox[i - 1][j][k];
             v_listBox[i - 1][j][k] = 0; //옮길칸 비우기
@@ -4032,8 +4086,8 @@ class _DatabaseApp extends State<DatabaseApp> {
           }
         }
       }
-      setState(() {});
     }
+    setState(() {});
   }
 
   //회전을 누르면 시계방향으로 90도 회전
@@ -4049,12 +4103,15 @@ class _DatabaseApp extends State<DatabaseApp> {
         v_listMove[i][j] = 0;
       }
     }
+
     int _color_R = 0;
     int _color_G = 0;
     int _color_B = 0;
     //회전대상의 위치를 찾아 저장(v_listMove 4개 칸에 저장)
     for (i = v_lineMove; i > 0; i--) {
+      //옮길 줄
       for (j = 0; j < v_colBox; j++) {
+        //옮길 칸
         if (v_listBox[i - 1][j][v_atr - 2] == 1 &&
             v_listBox[i - 1][j][v_atr - 1] == 0) {
           _color_R = v_listBox[i - 1][j][0];
@@ -4103,7 +4160,7 @@ class _DatabaseApp extends State<DatabaseApp> {
         v_listMove[2][2] == v_listMove[3][2]) {
       return;
     }
-    for (ii = 0; ii < v_listMove.length; ii++) {
+    for (ii = 0; ii < v_rowNext; ii++) {
       if (ii == _center) {
         // 기준점
         v_listMoveTarget[ii][0] = v_listMove[ii][0];
@@ -4113,13 +4170,22 @@ class _DatabaseApp extends State<DatabaseApp> {
         // 배치위치(중심i - 중심j + 대상j, 중심j)
         v_listMoveTarget[ii][0] =
             v_listMove[_center][0] - v_listMove[_center][1] + v_listMove[ii][1];
+        v_listMoveTarget[ii][1] = v_listMove[_center][1];
       } else if (v_listMove[_center][1] == v_listMove[ii][1]) {
         // 기준점의 상하 => 좌우
         // 배치위치(중심i, 중심j + 중심i - 대상i)
         v_listMoveTarget[ii][0] = v_listMove[_center][0];
-        v_listMoveTarget[ii][1] = v_listMove[_center][1] +
-            v_listMoveTarget[ii][1] -
-            v_listMove[ii][1];
+        v_listMoveTarget[ii][1] =
+            v_listMove[_center][1] + v_listMove[_center][0] - v_listMove[ii][0];
+      } else if ((v_listMove[_center][0] > v_listMove[ii][0] &&
+              v_listMove[_center][1] > v_listMove[ii][1]) ||
+          (v_listMove[_center][0] < v_listMove[ii][0] &&
+              v_listMove[_center][1] < v_listMove[ii][1])) {
+        // 기준점의 좌상우하 => 우상좌하
+        // 배치위치(대상i, 중심j + 중심j - 대상j)
+        v_listMoveTarget[ii][0] = v_listMove[ii][0];
+        v_listMoveTarget[ii][1] =
+            v_listMove[_center][1] + v_listMove[_center][1] - v_listMove[ii][1];
       } else {
         // 기준점의 우상좌하 => 우하좌상
         // 배치위치(중심i + 중심j - 대상i, 대상j)
@@ -4136,7 +4202,7 @@ class _DatabaseApp extends State<DatabaseApp> {
       if (v_listMoveTarget[ii][0] < 0 ||
           v_listMoveTarget[ii][0] > v_rowBox - 1 ||
           v_listMoveTarget[ii][1] < 0 ||
-          v_listMoveTarget[ii][1] > v_rowBox - 1) {
+          v_listMoveTarget[ii][1] > v_colBox - 1) {
         return;
       }
     }
@@ -4157,5 +4223,97 @@ class _DatabaseApp extends State<DatabaseApp> {
       v_listBox[v_listMoveTarget[ii][0]][v_listMoveTarget[ii][1]][4] = 0;
     }
     setState(() {});
+
+    // 5. 변수값 재설정 (이동시작라인 v_lineMove, 아이템라인수 v_listN0Box[0][0][0])
+    switch (v_listN0Box[0][0][0]) {
+      case 1:
+        v_listN0Box[0][0][0] = 4;
+        break;
+      case 2:
+        v_listN0Box[0][0][0] = 3;
+        break;
+      case 3:
+        v_listN0Box[0][0][0] = 2;
+        break;
+      case 4:
+        v_listN0Box[0][0][0] = 1;
+        break;
+    }
+    for (i = v_rowBox - 1; i > 0; i--) {
+      for (j = 0; j < v_colBox; j++) {
+        if (v_listBox[i][j][v_atr - 2] == 1 &&
+            v_listBox[i][j][v_atr - 1] == 0) {
+          v_lineMove = i + 1; // 1~20라인 설정
+          return;
+        }
+      }
+    }
+  }
+
+  // 줄깨기 체크
+  void step_check_line() {
+    // 아이템 라인수를 고정대상 체크하여 줄깨기
+    int _cnt_checkLine = 0; //깨진줄 수
+    for (i = v_lineMove; i > 0; i--) {
+      if (i <= v_lineMove - v_listN0Box[0][0][0]) break; // 아이템 라인수를 넘어가면 종료
+
+      int _sum_checkLine = 0;
+      for (j = 0; j < v_colBox; j++) {
+        _sum_checkLine = _sum_checkLine + v_listBox[i - 1][j][v_atr - 2];
+      }
+      if (_sum_checkLine == 10) {
+        for (j = 0; j < v_colBox; j++) {
+          for (k = 0; k < v_colBox; k++) {
+            v_listBox[i - 1][j][k] = 0;
+          }
+        }
+        v_score = v_score + 100;
+        _cnt_checkLine++;
+      }
+    }
+    setState(() {});
+    //깨진줄이 있으면 깨진줄을 채우려 내림
+    if (_cnt_checkLine == 0) return; //깨진줄이 없으면 종료
+    //v_listBox = v_listMirrorBox; 복사처리
+    for (i = 0; i < v_rowBox; i++) {
+      for (j = 0; j < v_colBox; j++) {
+        for (k = 0; k < v_atr; k++) {
+          v_listMirrorBox[i][j][k] = v_listMirrorBox[i][j][k];
+        }
+      }
+    }
+    //초기화
+    for (i = 0; i < v_rowBox; i++) {
+      for (j = 0; j < v_colBox; j++) {
+        for (k = 0; k < v_atr; k++) {
+          v_listBox[i][j][k] = 0;
+        }
+      }
+    }
+    //미러에서 한줄씩 자료가 있으면 게임판으로 복사
+    ii = v_rowBox;
+    for (i = v_rowBox; i > 0; i--) {
+      if (v_listMirrorBox[i - 1][0][v_atr - 2] +
+              v_listMirrorBox[i - 1][1][v_atr - 2] +
+              v_listMirrorBox[i - 1][2][v_atr - 2] +
+              v_listMirrorBox[i - 1][3][v_atr - 2] +
+              v_listMirrorBox[i - 1][4][v_atr - 2] +
+              v_listMirrorBox[i - 1][5][v_atr - 2] +
+              v_listMirrorBox[i - 1][6][v_atr - 2] +
+              v_listMirrorBox[i - 1][7][v_atr - 2] +
+              v_listMirrorBox[i - 1][8][v_atr - 2] +
+              v_listMirrorBox[i - 1][9][v_atr - 2] >
+          0) {
+        for (j = 0; j < v_colBox; j++) {
+          if (v_listMirrorBox[i - 1][j][v_atr - 2] > 0) {
+            for (k = 0; k < v_atr; k++) {
+              v_listBox[ii - 1][j][k] = v_listMirrorBox[i - 1][j][k];
+            }
+          }
+        }
+        setState(() {});
+        ii--;
+      }
+    }
   }
 }
