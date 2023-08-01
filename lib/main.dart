@@ -3290,7 +3290,10 @@ class _DatabaseApp extends State<DatabaseApp> {
                                         child: FadingImageButton(
                                           onPressed: () => {
                                             if (v_flagButtonArrow == true)
-                                              {press_arrow_rotate()}
+                                              {
+                                                Vibration.vibrate(duration: 20),
+                                                press_arrow_rotate()
+                                              }
                                             else
                                               {
                                                 flutter_toast(
@@ -3325,7 +3328,10 @@ class _DatabaseApp extends State<DatabaseApp> {
                                         child: FadingImageButton(
                                           onPressed: () => {
                                             if (v_flagButtonArrow == true)
-                                              {press_arrow_left()}
+                                              {
+                                                Vibration.vibrate(duration: 20),
+                                                press_arrow_left()
+                                              }
                                             else
                                               {
                                                 flutter_toast(
@@ -3339,14 +3345,17 @@ class _DatabaseApp extends State<DatabaseApp> {
                                         ),
                                       ),
                                     ),
-                                    // 하단 중앙 하버튼
+                                    // 하단 중앙 하단버튼
                                     Expanded(
                                       flex: 1,
                                       child: Container(
                                         child: FadingImageButton(
                                           onPressed: () => {
                                             if (v_flagButtonArrow == true)
-                                              {press_arrow_down()}
+                                              {
+                                                Vibration.vibrate(duration: 20),
+                                                press_arrow_down()
+                                              }
                                             else
                                               {
                                                 flutter_toast(
@@ -3367,7 +3376,10 @@ class _DatabaseApp extends State<DatabaseApp> {
                                         child: FadingImageButton(
                                           onPressed: () => {
                                             if (v_flagButtonArrow == true)
-                                              {press_arrow_right()}
+                                              {
+                                                Vibration.vibrate(duration: 20),
+                                                press_arrow_right()
+                                              }
                                             else
                                               {
                                                 flutter_toast(
@@ -3426,11 +3438,55 @@ class _DatabaseApp extends State<DatabaseApp> {
                                 ),
                               ),
                             ),
+                            // body 하단 우측 대기버튼
                             Expanded(
                               flex: 1,
                               child: Container(
                                 child: FadingImageButton(
-                                  onPressed: () => {},
+                                  // onPressed: () => {},
+                                  onPressed: () async {
+                                    if (v_flagButtonPause == true) {
+                                      _timer.cancel();
+                                      if (v_volume == true) {
+                                        _playerLoop.pause();
+                                      }
+
+                                      await showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  style: TextStyle(
+                                                      color: Colors.pink,
+                                                      fontSize: 15),
+                                                  'Alert'),
+                                              content: Text(
+                                                  'Would you like to continue?'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('Yes')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      step_end_play();
+                                                    },
+                                                    child: const Text('No')),
+                                              ],
+                                            );
+                                          });
+                                      if (v_flagButtonPause == true) {
+                                        step_timer();
+                                        if (v_volume == true) {
+                                          _playerLoop.play();
+                                        }
+                                      }
+                                    } else {
+                                      flutter_toast(1, 'Not executed!');
+                                    }
+                                  },
                                   image: Image.asset("asset/images/pause.png"),
                                   onPressedImage:
                                       Image.asset("asset/images/pause_b.png"),
@@ -3830,24 +3886,6 @@ class _DatabaseApp extends State<DatabaseApp> {
     }
   }
 
-  //이벤트 - 게임시작 버튼을 누르면
-  void press_play() {
-    v_flagButtonPlay = false; // false 는 버튼을 못누름
-    v_flagButtonStop = true;
-    v_flagButtonPause = true;
-    v_flagButtonArrow = true;
-
-    step_initial();
-    step_initial_next1();
-    step_initial_next2();
-
-    setState(() {});
-
-    v_timeInterval = v_timeInterval_base - ((v_level - 1) * 50);
-    v_timeInterval < 50 ? 50 : v_timeInterval;
-    step_timer();
-  }
-
   void step_get_listN0Box() {
     //4,5,6,7 칸에 고정이 있으면 게임종료
     for (i = 0; i < v_colNext; i++) {
@@ -3870,11 +3908,68 @@ class _DatabaseApp extends State<DatabaseApp> {
     }
   }
 
+  //이벤트 - 게임시작 버튼을 누르면
+  void press_play() {
+    if (v_volume == true) {
+      audioPlayerLoop('asset/audio/bgm.mp3');
+    }
+    v_flagButtonPlay = false; // false 는 버튼을 못누름
+    v_flagButtonStop = true;
+    v_flagButtonPause = true;
+    v_flagButtonArrow = true;
+
+    step_initial();
+    step_initial_next1();
+    step_initial_next2();
+
+    setState(() {});
+
+    v_timeInterval = v_timeInterval_base - ((v_level - 1) * 50);
+    v_timeInterval < 50 ? 50 : v_timeInterval;
+    step_timer();
+  }
+
+  //레벨성공
+  void step_end_level() {
+    _timer.cancel();
+    if (v_volume == true) {
+      _playerLoop.stop();
+      audioPlayer('asset/audio/clap.mp3');
+    }
+    v_flagButtonPlay = true;
+    v_flagButtonStop = false;
+    v_flagButtonPause = false;
+    v_flagButtonArrow = false;
+    v_countItem = 0;
+    v_score = v_score + 300;
+    flutter_toast(2, 'Level Success!');
+  }
+
   //레벨실패
   void step_end_play() {
     _timer.cancel();
+    if (v_volume == true) {
+      _playerLoop.stop();
+      audioPlayer('asset/audio/fail.mp3');
+    }
     v_flagButtonPlay = true; // false 는 버튼을 못누름
     v_flagButtonStop = false;
+    v_flagButtonPause = false;
+    v_flagButtonArrow = false;
+    _insert();
+    flutter_toast(2, 'Game Over!');
+    v_flagStartGame = true;
+  }
+
+  //게임 종료
+  void press_stop() {
+    _timer.cancel();
+    if (v_volume == true) {
+      _playerLoop.stop();
+      audioPlayer('asset/audio/gameover.mp3');
+    }
+    v_flagButtonPlay = false; // false 는 버튼을 못누름
+    v_flagButtonStop = true;
     v_flagButtonPause = false;
     v_flagButtonArrow = false;
     _insert();
@@ -3887,7 +3982,7 @@ class _DatabaseApp extends State<DatabaseApp> {
 
     final Database database = await widget.db;
     await database.rawUpdate(
-        "inset into ranks (rankDate, score) values ('$_today', '$v_score)");
+        "insert into ranks (rankDate, score) values ('$_today', $v_score)");
   }
 
   // 타이머 가동
@@ -3906,24 +4001,11 @@ class _DatabaseApp extends State<DatabaseApp> {
       step_get_listN0Box(); // n0에 있는 아이템을 1줄을 게임판 1번줄 4,5,6,7칸에 옮겨옴
       setState(() {});
       if (v_flagNext == true) step_check_line(); // 체크_줄깨기
-
       //40개의 아이템이 생성되면 레벨성공
       if (v_countItem > 40) {
         step_end_level();
       }
     });
-  }
-
-  //레벨성공
-  void step_end_level() {
-    _timer.cancel();
-    v_flagButtonPlay = true;
-    v_flagButtonStop = false;
-    v_flagButtonPause = false;
-    v_flagButtonArrow = false;
-    v_countItem = 0;
-    v_score = v_score + 300;
-    flutter_toast(2, 'Level Success!');
   }
 
   // 아이템을 next1 => next0, next2 => next1 로 옮김
@@ -4262,8 +4344,12 @@ class _DatabaseApp extends State<DatabaseApp> {
         _sum_checkLine = _sum_checkLine + v_listBox[i - 1][j][v_atr - 2];
       }
       if (_sum_checkLine == 10) {
+        if (v_volume == true) {
+          audioPlayer('asset/audio/lineBroken.mp3');
+        }
+
         for (j = 0; j < v_colBox; j++) {
-          for (k = 0; k < v_colBox; k++) {
+          for (k = 0; k < v_atr; k++) {
             v_listBox[i - 1][j][k] = 0;
           }
         }
@@ -4272,13 +4358,14 @@ class _DatabaseApp extends State<DatabaseApp> {
       }
     }
     setState(() {});
+
     //깨진줄이 있으면 깨진줄을 채우려 내림
     if (_cnt_checkLine == 0) return; //깨진줄이 없으면 종료
     //v_listBox = v_listMirrorBox; 복사처리
     for (i = 0; i < v_rowBox; i++) {
       for (j = 0; j < v_colBox; j++) {
         for (k = 0; k < v_atr; k++) {
-          v_listMirrorBox[i][j][k] = v_listMirrorBox[i][j][k];
+          v_listMirrorBox[i][j][k] = v_listBox[i][j][k];
         }
       }
     }
@@ -4290,6 +4377,7 @@ class _DatabaseApp extends State<DatabaseApp> {
         }
       }
     }
+
     //미러에서 한줄씩 자료가 있으면 게임판으로 복사
     ii = v_rowBox;
     for (i = v_rowBox; i > 0; i--) {
