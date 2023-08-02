@@ -13,6 +13,7 @@ import 'package:intl/intl.dart'; // 달력
 import 'package:url_launcher/url_launcher.dart'; // 웹페이지 열기에 사용
 import 'dart:math'; // Random 사용
 import 'dart:async';
+// import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -3522,15 +3523,15 @@ class _DatabaseApp extends State<DatabaseApp> {
   }
 
   final _player = AudioPlayer();
-  Future audioPlayer(parm_mp3) async {
-    await _player.setAsset(parm_mp3);
+  Future audioPlayer(parmMp3) async {
+    await _player.setAsset(parmMp3);
     _player.play();
   }
 
   final _playerLoop = AudioPlayer(); // 백그라운드 반복
-  Future audioPlayerLoop(parm_mp3) async {
+  Future audioPlayerLoop(parmMp3) async {
     await _playerLoop.setLoopMode(LoopMode.one); // 반복 설정
-    await _playerLoop.setAsset(parm_mp3);
+    await _playerLoop.setAsset(parmMp3);
     _playerLoop.play();
   }
 

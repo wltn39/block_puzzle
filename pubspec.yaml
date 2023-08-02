@@ -44,6 +44,7 @@ dependencies:
   vibration: ^1.8.1 # 진동
   url_launcher: ^6.1.12 # 웹페이지 열기에 사용
   intl: ^0.18.1 # 달력
+  # audioplayers: ^5.0.0
 
 dev_dependencies:
   flutter_test:
